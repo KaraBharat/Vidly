@@ -6,7 +6,12 @@
 
 <h2>Customer details</h2>
 
-<h1>@Model.Name</h1>
+<h1>Name : @Model.Name</h1>
+<h3>Membership Type : @Model.MembershipType.Type</h3>
+@if (@Model.DateOfBirth.HasValue)
+{
+    <h3>Name : @Model.DateOfBirth</h3>
+}
 
 @Html.ActionLink("Back to customers", "Index")
 

@@ -33,7 +33,7 @@ namespace Vidly.Controllers
         {
 
             var customerViewModel = new CustomerViewModels();
-            var customer = _dbContext.Customer.Where(s => s.Id == Id).FirstOrDefault();
+            var customer = _dbContext.Customer.Where(s => s.Id == Id).Include(c => c.MembershipType).FirstOrDefault();
 
             if (customer == null)
                 return HttpNotFound();

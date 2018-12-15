@@ -16,7 +16,7 @@
     <AssemblyName>Vidly</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <MvcBuildViews>false</MvcBuildViews>
-    <UseIISExpress>false</UseIISExpress>
+    <UseIISExpress>true</UseIISExpress>
     <Use64BitIISExpress />
     <IISExpressSSLPort />
     <IISExpressAnonymousAuthentication />
@@ -201,6 +201,10 @@
     <Compile Include="Migrations\201812150738454_AddMembershipTypeName.Designer.cs">
       <DependentUpon>201812150738454_AddMembershipTypeName.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201812150747404_AddDateOfBirthToCustomer.cs" />
+    <Compile Include="Migrations\201812150747404_AddDateOfBirthToCustomer.Designer.cs">
+      <DependentUpon>201812150747404_AddDateOfBirthToCustomer.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Customer.cs" />
@@ -307,6 +311,9 @@
     <EmbeddedResource Include="Migrations\201812150738454_AddMembershipTypeName.resx">
       <DependentUpon>201812150738454_AddMembershipTypeName.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201812150747404_AddDateOfBirthToCustomer.resx">
+      <DependentUpon>201812150747404_AddDateOfBirthToCustomer.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
@@ -326,7 +333,7 @@
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>53459</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://localhost/Vidly</IISUrl>
+          <IISUrl>http://localhost:53459/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>
