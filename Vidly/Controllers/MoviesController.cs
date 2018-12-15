@@ -37,6 +37,16 @@ namespace Vidly.Controllers
 
             return View(movie);
         }
+
+        public ActionResult New()
+        {
+            var newMovie = new MovieFormViewModels()
+            {
+                Genre = _dbContext.Genre.ToList()
+            };
+            return View("MovieForm", newMovie);
+        }
+
         protected override void Dispose(bool disposing)
         {
             _dbContext.Dispose();

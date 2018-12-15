@@ -28,6 +28,36 @@ namespace Vidly.Controllers
             return View(customerViewModel);
         }
 
+        public ActionResult New()
+        {
+            var newCustomer = new CustomerFormViewModels()
+            {
+                MembershipType = _dbContext.MembershipType.ToList()
+            };
+            return View("CustomerForm", newCustomer);
+        }
+
+        [HttpPost]
+        public ActionResult Save(Customer customer)
+        {
+            if (customer.Id == 0)
+            {
+                _dbContext.Customer.Add(customer);
+            }
+            else
+            {
+                var customerInDb = _dbContext.Customer.Where(s => s.Id == customer.Id).Include(c => c.MembershipType).First();
+                customerInDb.Name = customer.Name;
+                customerInDb.DateOfBirth = customer.DateOfBirth;
+                customerInDb.IsSubscribedToNewsletter = customer.IsSubscribedToNewsletter;
+                customerInDb.MembershipTypeId = customer.MembershipTypeId;
+            }
+
+            _dbContext.SaveChanges();
+
+            return RedirectToAction("Index", "Customers");
+        }
+
         [Route("customers/details/{Id}")]
         public ActionResult Detail(int Id)
         {
@@ -37,6 +67,24 @@ namespace Vidly.Controllers
                 return HttpNotFound();
 
             return View(customer);
+        }
+
+        [Route("customers/edit/{Id}")]
+        public ActionResult Edit(int Id)
+        {
+            var customer = _dbContext.Customer.Where(s => s.Id == Id).Include(c => c.MembershipType).FirstOrDefault();
+
+            if (customer == null)
+                return HttpNotFound();
+
+            var customerForm = new CustomerFormViewModels()
+            {
+                Customer = customer,
+                MembershipType = _dbContext.MembershipType.ToList()
+            };
+
+
+            return View("CustomerForm", customerForm);
         }
 
         protected override void Dispose(bool disposing)

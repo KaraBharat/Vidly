@@ -14,6 +14,7 @@
                 <th scope="col">Name</th>
                 <th scope="col">Membership Type</th>
                 <th scope="col">Discount Rate</th>
+                <th scope="col">Action</th>
             </tr>
         </thead>
         <tbody>
@@ -29,10 +30,13 @@
                     <td>
                         @cus.MembershipType.DiscountRate%
                     </td>
+                    <td>@Html.ActionLink("Edit", "Edit", new { Id = cus.Id })</td>
                 </tr>
             }
         </tbody>
     </table>
+
+    @Html.ActionLink("Add New", "New")
 }
 else
 {

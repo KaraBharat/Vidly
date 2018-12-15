@@ -223,7 +223,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
     <Compile Include="ViewModels\CustomerViewModels.cs" />
+    <Compile Include="ViewModels\MovieFormViewModels.cs" />
     <Compile Include="ViewModels\MovieViewModels.cs" />
+    <Compile Include="ViewModels\CustomerFormViewModels.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap-luman.css" />
@@ -287,6 +289,8 @@
     <Content Include="Views\Shared\_NavBar.cshtml" />
     <Content Include="Views\Customers\Detail.cshtml" />
     <Content Include="Views\Movies\Detail.cshtml" />
+    <Content Include="Views\Customers\CustomerForm.cshtml" />
+    <Content Include="Views\Movies\MovieForm.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
