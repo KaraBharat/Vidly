@@ -1,0 +1,12 @@
+﻿@model Vidly.Models.Customer
+@{
+    ViewBag.Title = "Detail";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Customer details</h2>
+
+<h1>@Model.Name</h1>
+
+@Html.ActionLink("Back to customers", "Index")
+
