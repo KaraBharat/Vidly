@@ -12,14 +12,22 @@
         <thead class="thead-dark">
             <tr>
                 <th scope="col">Name</th>
+                <th scope="col">Membership Type</th>
+                <th scope="col">Discount Rate</th>
             </tr>
         </thead>
         <tbody>
-            @foreach (var movie in @Model.Customers)
+            @foreach (var cus in @Model.Customers)
             {
                 <tr>
                     <td>
-                        @Html.ActionLink(movie.Name, "details", new { Id = movie.Id })
+                        @Html.ActionLink(cus.Name, "details", new { Id = cus.Id })
+                    </td>
+                    <td>
+                        @cus.MembershipType.Type
+                    </td>
+                    <td>
+                        @cus.MembershipType.DiscountRate%
                     </td>
                 </tr>
             }
