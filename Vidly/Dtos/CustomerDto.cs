@@ -5,9 +5,9 @@ using System.Linq;
 using System.Web;
 using Vidly.Utilities;
 
-namespace Vidly.Models
+namespace Vidly.Dtos
 {
-    public class Customer
+    public class CustomerDto
     {
         public int Id { get; set; }
 
@@ -17,13 +17,9 @@ namespace Vidly.Models
 
         public bool IsSubscribedToNewsletter { get; set; }
 
-        public MembershipType MembershipType { get; set; }
-
-        [Display(Name = "Membership Type")]
         public byte MembershipTypeId { get; set; }
 
-        [Min18YearsIfAMember]
-        [Display(Name = "Date Of Birth")]
+        //[Min18YearsIfAMember]
         public DateTime? DateOfBirth { get; set; }
     }
 }

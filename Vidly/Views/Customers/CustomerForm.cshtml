@@ -15,19 +15,24 @@ else
 
 @using (Html.BeginForm("Save", "Customers"))
 {
+    @Html.ValidationSummary(true, "Please fix the below errors")
+
     <div class="form-group">
         @Html.LabelFor(c => c.Customer.Name)
         @Html.TextBoxFor(c => c.Customer.Name, new { @Class = "form-control" })
-    </div>
-
-    <div class="form-group">
-        @Html.LabelFor(c => c.Customer.DateOfBirth)
-        @Html.TextBoxFor(c => c.Customer.DateOfBirth, "{0:d MMM yyyy}", new { @Class = "form-control" })
+        @Html.ValidationMessageFor(c => c.Customer.Name)
     </div>
 
     <div class="form-group">
         @Html.LabelFor(c => c.Customer.MembershipTypeId)
         @Html.DropDownListFor(c => c.Customer.MembershipTypeId, new SelectList(Model.MembershipType, "Id", "Type"), "--Select--", new { @Class = "form-control" })
+        @Html.ValidationMessageFor(c => c.Customer.MembershipTypeId)
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(c => c.Customer.DateOfBirth)
+        @Html.TextBoxFor(c => c.Customer.DateOfBirth, "{0:d MMM yyyy}", new { @Class = "form-control" })
+        @Html.ValidationMessageFor(c => c.Customer.DateOfBirth)
     </div>
 
     <div class="checkbox">
@@ -37,8 +42,14 @@ else
     </div>
 
     @Html.HiddenFor(c => c.Customer.Id)
+    @Html.AntiForgeryToken();
     <button type="submit" class="btn btn-info">Save</button>
 
 }
 
 @Html.ActionLink("Back to customers", "Index")
+
+@section scripts
+{
+    @Scripts.Render("~/bundles/jqueryval");
+}
