@@ -5,6 +5,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using Vidly.Models;
+using Vidly.Resources;
 using Vidly.ViewModels;
 
 namespace Vidly.Controllers
@@ -24,7 +25,10 @@ namespace Vidly.Controllers
 
             movieViewModel.Movies = _dbContext.Movie.Include(m => m.Genre).ToList();
 
-            return View(movieViewModel);
+            if (User.IsInRole(UserRoles.CanManageMovies))
+                return View("List",movieViewModel);
+
+            return View("ReadOnlyList", movieViewModel);
         }
 
         [Route("movies/details/{Id}")]
@@ -38,6 +42,7 @@ namespace Vidly.Controllers
             return View(movie);
         }
 
+        [Authorize(Roles = UserRoles.CanManageMovies)]
         [Route("movies/edit/{Id}")]
         public ActionResult Edit(int Id)
         {
@@ -50,6 +55,7 @@ namespace Vidly.Controllers
             return View("MovieForm", editMovie);
         }
 
+        [Authorize(Roles = UserRoles.CanManageMovies)]
         public ActionResult New()
         {
             var newMovie = new MovieFormViewModels()
@@ -59,6 +65,7 @@ namespace Vidly.Controllers
             return View("MovieForm", newMovie);
         }
 
+        [Authorize(Roles = UserRoles.CanManageMovies)]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Save(Movie movie)
