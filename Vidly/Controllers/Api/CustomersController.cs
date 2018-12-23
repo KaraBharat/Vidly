@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Data.Entity;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
@@ -23,7 +24,10 @@ namespace Vidly.Controllers.Api
         // GET api/customers
         public IHttpActionResult GetCustomers()
         {
-            var customers = _dbContext.Customer.ToList().Select(Mapper.Map<Customer, CustomerDto>);
+            var customers = _dbContext.Customer
+                .Include(s => s.MembershipType)
+                .ToList()
+                .Select(Mapper.Map<Customer, CustomerDto>);
 
             if (customers == null || !customers.Any())
                 return NotFound();
@@ -39,7 +43,7 @@ namespace Vidly.Controllers.Api
             if (customer == null)
                 return NotFound();
 
-            return Ok(Mapper.Map<Customer,CustomerDto>(customer));
+            return Ok(Mapper.Map<Customer, CustomerDto>(customer));
         }
 
         // POST api/customers
@@ -73,7 +77,7 @@ namespace Vidly.Controllers.Api
             if (customerInDb == null)
                 return NotFound();
 
-            Mapper.Map(customerDto, customerInDb); 
+            Mapper.Map(customerDto, customerInDb);
 
             _dbContext.SaveChanges();
 
