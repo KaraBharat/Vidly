@@ -11,11 +11,12 @@
 {
     <table class="table">
         <thead class="thead-dark">
-        <tr>
-            <th scope="col">Name</th>
-            <th scope="col">Genre</th>
-            <th scope="col">Stock</th>
-        </tr>
+            <tr>
+                <th scope="col">Name</th>
+                <th scope="col">Genre</th>
+                <th scope="col">Stock</th>
+                <th scope="col">Available</th>
+            </tr>
         </thead>
         <tbody>
         @foreach (var movie in @Model.Movies)
@@ -24,6 +25,7 @@
                 <td> @Html.ActionLink(movie.Name, "details", new { Id = movie.Id }) </td>
                 <td>@movie.Genre.Name</td>
                 <td>@movie.NumberInStock</td>
+                <td>@movie.NumberAvailable</td>
             </tr>
         }
         </tbody>
